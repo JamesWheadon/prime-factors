@@ -1,5 +1,5 @@
 const primeFunctions = require("../prime-factors.js");
-let primeFactor = primeFunctions.primeFactor;
+let primeFactor = primeFunctions.primeFactors;
 
 describe("prime factors", () => {
     test('The function is defined', () => {
@@ -12,10 +12,16 @@ describe("prime factors", () => {
         expect(primeFactor()).toBeTruthy();
     });
     test('It wont return factors given a single input that isnt a number', () => {
-        expect(primeFactor("2")).toEqual("Inputs must be numbers");
+        expect(primeFactor("2")).toEqual("Inputs must be integers");
     });
     test('It wont return factors given any input that isnt a number', () => {
-        expect(primeFactor("2", 8)).toEqual("Inputs must be numbers");
+        expect(primeFactor("2", 8)).toEqual("Inputs must be integers");
+    });
+    test('It needs integer inputs', () => {
+        expect(primeFactor(2.5, 8)).toEqual("Inputs must be integers");
+    });
+    test('Inputs must be larger than 1', () => {
+        expect(primeFactor(1, 8)).toEqual("Inputs must be greater than 1");
     });
 });
 

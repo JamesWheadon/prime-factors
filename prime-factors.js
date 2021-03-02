@@ -1,27 +1,23 @@
 const { number } = require("yargs");
 
 function primeFactors(num1, num2=null) {
-    if (typeof(num1) != number || (typeof(num2) != number && num2 != null)) {
-        return "Inputs must be numbers";
-    }
-    if (num1 <= 2 || (typeof(num2) == number && num2 <=2)) {
-        return "Inputs must be greater than 1";
-    }
-    if (Math.round(num1) != num1 || (typeof(num2) == number && Math.round(num2) != num2)) {
+    if (!Number.isInteger(num1) || (!Number.isInteger(num2) && num2 != null)) {
         return "Inputs must be integers";
     }
+    if (num1 < 2 || (Number.isInteger(num2) && num2 <2)) {
+        return "Inputs must be greater than 1";
+    }
     if (num2 == null) {
-        primeFactorDecomp(num1);
+        return primeFactorDecomp(num1);
     }
     else {
-        commonFactorMultiple(num1, num2);
+        return commonFactorMultiple(num1, num2);
     }
 }
 
 function primeFactorDecomp(num) {
     let primes = [];
-    let max = Math.round(num / 2);
-    for (let i = 2; i <= max; i++) {
+    for (let i = 2; i <= num; i++) {
         iPrime = true;
         for (prime of primes) {
             if (i % prime == 0) {
@@ -86,5 +82,4 @@ function commonFactorMultiple(num1, num2) {
     return [HCF, LCM];
 }
 
-console.log(primeFactorDecomp(20));
-console.log(commonFactorMultiple(18, 12));
+module.exports = {primeFactors}
