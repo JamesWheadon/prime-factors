@@ -43,9 +43,48 @@ function primeFactorDecomp(num) {
         else {
             primeIndex++;
         }
-        console.log(num);
     }
     return primeFactors;
 }
 
+function commonFactorMultiple(num1, num2) {
+    let primes1 = primeFactorDecomp(num1);
+    let primes2 = primeFactorDecomp(num2);
+    let commonPrimes = [];
+    let allPrimes = [];
+    while( primes1.length > 0 && primes2.length > 0 )
+    {  
+        if (primes1[0] < primes2[0] ) {
+            allPrimes.push(primes1.shift());
+        }
+        else if (primes1[0] > primes2[0] ) {
+            allPrimes.push(primes2.shift());
+        }
+        else {
+            allPrimes.push(primes1.shift());
+            commonPrimes.push(primes2.shift());
+        }
+    }
+    let HCF = 1;
+    for (factor of commonPrimes) {
+        HCF = HCF * factor;
+    }
+    let LCM = 1;
+    for (factor of allPrimes) {
+        LCM = LCM * factor;
+    }
+    if (primes1.length > 0) {
+        for (factor of primes1) {
+            LCM = LCM * factor;
+        }
+    }
+    else if (primes2.length > 0) {
+        for (factor of primes2) {
+            LCM = LCM * factor;
+        }
+    }
+    return [HCF, LCM];
+}
+
 console.log(primeFactorDecomp(20));
+console.log(commonFactorMultiple(18, 12));
